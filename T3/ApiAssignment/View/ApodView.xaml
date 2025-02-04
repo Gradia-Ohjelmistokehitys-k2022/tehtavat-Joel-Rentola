@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="ApiAssignment.View.ApodView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ApiAssignment.View"
+             mc:Ignorable="d" 
+             >
+    <Grid Background="White" Height="379" Width="668">
+        <Button Content="Fetch Data" HorizontalAlignment="Left" Margin="150,215,0,0" VerticalAlignment="Top" Command="{Binding FetchData}"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="59,95,0,0" VerticalAlignment="Top" Width="221"/>
+    </Grid>
+</UserControl>
