@@ -6,8 +6,15 @@
              xmlns:local="clr-namespace:ApiAssignment.View"
              mc:Ignorable="d" 
              >
-    <Grid Background="White" Height="379" Width="668">
-        <Button Content="Fetch Data" HorizontalAlignment="Left" Margin="150,215,0,0" VerticalAlignment="Top" Command="{Binding FetchData}"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="59,95,0,0" VerticalAlignment="Top" Width="221"/>
+    <Grid Background="White" Height="417" Width="876">
+        <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="241" Width="420" Margin="47,50,0,0">
+            <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding ImgSource}" Stretch="Fill"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="242" Width="303" Margin="522,49,0,0">
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Explanation}" IsReadOnly="True" FontSize="16"/>
+        </Border>
+        <Button Content="Fetch Data" HorizontalAlignment="Left" Margin="384,296,0,0" VerticalAlignment="Top" Command="{Binding FetchData}" Height="30" Width="83"/>
+        <Label Content="Explanation:" HorizontalAlignment="Left" Margin="522,18,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <DatePicker HorizontalAlignment="Left" Margin="254,296,0,0" VerticalAlignment="Top" DisplayDate="{Binding DtpValue, Mode=TwoWay}" Width="125" Height="30"/>
     </Grid>
 </UserControl>

@@ -13,7 +13,7 @@ namespace ApiAssignment.ViewModel
 
         protected void INotifyPropertyChanged(string propertyName)
         {
-            PropertyChanged ?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
