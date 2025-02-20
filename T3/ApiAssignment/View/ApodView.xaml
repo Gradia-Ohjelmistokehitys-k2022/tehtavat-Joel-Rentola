@@ -6,15 +6,16 @@
              xmlns:local="clr-namespace:ApiAssignment.View"
              mc:Ignorable="d" 
              >
-    <Grid Background="White" Height="417" Width="876">
-        <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="241" Width="420" Margin="47,50,0,0">
+    <Grid Background="White" Height="505" Width="1149">
+        <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="324" Width="576" Margin="47,50,0,0">
             <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding ImgSource}" Stretch="Fill"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="242" Width="303" Margin="522,49,0,0">
-            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Explanation}" IsReadOnly="True" FontSize="16"/>
+        <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="324" Width="414" Margin="668,50,0,0">
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Explanation}" IsReadOnly="True" FontSize="{Binding FontSize}"/>
         </Border>
-        <Button Content="Fetch Data" HorizontalAlignment="Left" Margin="384,296,0,0" VerticalAlignment="Top" Command="{Binding FetchData}" Height="30" Width="83"/>
-        <Label Content="Explanation:" HorizontalAlignment="Left" Margin="522,18,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <DatePicker HorizontalAlignment="Left" Margin="254,296,0,0" VerticalAlignment="Top" DisplayDate="{Binding DtpValue, Mode=TwoWay}" Width="125" Height="30"/>
+        <Button Content="Fetch Data" HorizontalAlignment="Left" Margin="540,390,0,0" VerticalAlignment="Top" Command="{Binding FetchData}" Height="30" Width="83"/>
+        <Label Content="Explanation:" HorizontalAlignment="Left" Margin="668,10,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <DatePicker HorizontalAlignment="Left" Margin="395,390,0,0" VerticalAlignment="Top" SelectedDate="{Binding DtpValue, Mode=TwoWay}" DisplayDateStart="1995-06-16" DisplayDateEnd="{Binding DateToday}" Width="125" Height="30"/>
+        <ComboBox HorizontalAlignment="Left" Margin="962,383,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding FontSizes}" SelectedValue="{Binding FontSize, Mode=TwoWay}"/>
     </Grid>
 </UserControl>
