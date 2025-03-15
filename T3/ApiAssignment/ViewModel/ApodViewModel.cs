@@ -10,7 +10,10 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Drawing;
 using static System.Net.WebRequestMethods;
+using System.Drawing.Text;
+using System.Windows.Controls;
 
 namespace ApiAssignment.ViewModel
 {
@@ -22,6 +25,8 @@ namespace ApiAssignment.ViewModel
         private DateTime _dtpValue;
         private int _fontSize;
         private List<int> _fontSizes;
+        private string _selectedFont;
+        private List<string> _selectableFonts = new List<string>();
         private DateTime _dateToday;
         public ImageSource ImgSource { 
             get => _imgSource;
@@ -67,6 +72,24 @@ namespace ApiAssignment.ViewModel
                 INotifyPropertyChanged(nameof(FontSizes));
             }
         }
+        public string SelectedFont
+        {
+            get => _selectedFont;
+            set
+            {
+                _selectedFont = value;
+                INotifyPropertyChanged(nameof(SelectedFont));
+            }
+        }
+        public List<string> SelectableFonts
+        {
+            get => _selectableFonts;
+            set
+            {
+                _selectableFonts = value;
+                INotifyPropertyChanged(nameof(SelectableFonts));
+            }
+        }
         public DateTime DateToday
         {
             get => _dateToday;
@@ -94,8 +117,11 @@ namespace ApiAssignment.ViewModel
             FetchData = new TestCommand(func);
             ImgSource = new BitmapImage(new Uri("https://static.wikia.nocookie.net/freestylerp/images/5/5f/Placeholder.jpg/revision/latest?cb=20240111110709"));
             FontSizes = Enumerable.Range(12, 15).ToList();
+            SelectedFont = "Segoe UI";
+            AddFonts();
             FontSize = 20;
             DtpValue = DateTime.Now;
+            DateToday = DateTime.Now;
         }
         async Task func()
         {
@@ -117,6 +143,16 @@ namespace ApiAssignment.ViewModel
                 MediaSource = resultData.url;
                 Explanation = resultData.explanation;
             }
+        }
+
+        private void AddFonts()
+        {
+            using InstalledFontCollection col = new();
+            foreach (System.Drawing.FontFamily fa in col.Families)
+            {
+                SelectableFonts.Add(fa.Name);
+            }
+
         }
     }
 }
