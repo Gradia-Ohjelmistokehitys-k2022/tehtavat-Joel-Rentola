@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ApiAssignment.Commands
 {
-    class TestCommand : BaseCommand
+    class RelayCommand : BaseCommand
     {
         private readonly Func<Task> testFunc;
 
-        public TestCommand(Func<Task> testFunc)
+        public RelayCommand(Func<Task> testFunc)
         {
             this.testFunc = testFunc;
         }

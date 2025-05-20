@@ -20,6 +20,8 @@ namespace ApiAssignment.ViewModel
     public class ApodViewModel : BaseViewModel
     {
         public ICommand FetchData {  get; }
+        public ICommand PreviousBtnCommand { get; }
+        public ICommand NextBtnCommand { get; }
         private ImageSource _imgSource;
         private string _explanation;
         private DateTime _dtpValue;
@@ -110,11 +112,23 @@ namespace ApiAssignment.ViewModel
                 INotifyPropertyChanged(nameof(MediaSource));
             }
         }
+        private Cursor _cur;
+        public Cursor Cur
+        {
+            get => _cur;
+            set
+            {
+                _cur = value;
+                INotifyPropertyChanged(nameof(Cur));
+            }
+        }
 
 
         public ApodViewModel ()
         {
-            FetchData = new TestCommand(func);
+            FetchData = new RelayCommand(GetDataFromAPI);
+            PreviousBtnCommand = new RelayCommand(PreviousDay);
+            NextBtnCommand = new RelayCommand(NextDay);
             ImgSource = new BitmapImage(new Uri("https://static.wikia.nocookie.net/freestylerp/images/5/5f/Placeholder.jpg/revision/latest?cb=20240111110709"));
             FontSizes = Enumerable.Range(12, 15).ToList();
             SelectedFont = "Segoe UI";
@@ -122,15 +136,16 @@ namespace ApiAssignment.ViewModel
             FontSize = 20;
             DtpValue = DateTime.Now;
             DateToday = DateTime.Now;
+            Cur = new Cursor("C:\\Windows\\Cursors\\aero_arrow.cur", true);
         }
-        async Task func()
+        async Task GetDataFromAPI()
         {
-            //MessageBox.Show($"apod?api_key=DEMO_KEY&date={DtpValue.ToString("yyyy-MM-dd")}");
+            Cur = new Cursor("C:\\Windows\\Cursors\\aero_working.ani", true);
             await APIconnection.FetchData($"apod?api_key=DEMO_KEY&date={DtpValue.ToString("yyyy-MM-dd")}");
             UpdateThings();
         }
 
-        private void UpdateThings()
+        private async Task UpdateThings()
         {
             if (APIconnection.resData == null)
             {
@@ -142,6 +157,7 @@ namespace ApiAssignment.ViewModel
                 ImgSource = new BitmapImage(new Uri(resultData.url));
                 MediaSource = resultData.url;
                 Explanation = resultData.explanation;
+                Cur = new Cursor("C:\\Windows\\Cursors\\aero_arrow.cur", true);
             }
         }
 
@@ -153,6 +169,29 @@ namespace ApiAssignment.ViewModel
                 SelectableFonts.Add(fa.Name);
             }
 
+        }
+
+        async Task PreviousDay()
+        {
+            if (DtpValue.Day == 16 && DtpValue.Month == 6 && DtpValue.Year == 1995)
+            {
+                return;
+            }
+            else
+            {
+                DtpValue = DtpValue.AddDays(-1);
+            }
+        }
+        async Task NextDay()
+        {
+            if (DtpValue.Day == DateToday.Day && DtpValue.Month == DateToday.Month && DtpValue.Year == DateToday.Year)
+            {
+                return;
+            }
+            else
+            {
+                DtpValue = DtpValue.AddDays(1);
+            }
         }
     }
 }
